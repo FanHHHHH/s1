@@ -1,3 +1,13 @@
+use std::io::{Read, Write};
+use std::net::TcpStream;
+use std::str;
+
 fn main() {
-    println!("Hello, world!");
+    let mut stream = TcpStream::connect("127.0.0.1:3000").unwrap();
+    stream.write("hello".as_bytes()).unwrap();
+
+    let mut buffer = [0; 5];
+    stream.read(&mut buffer).unwrap();
+
+    println!("从服务器的相应：{:?}", str::from_utf8(&buffer));
 }
