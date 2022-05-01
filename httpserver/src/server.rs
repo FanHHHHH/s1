@@ -1,4 +1,4 @@
-use super::router;
+use super::router::Router;
 use http::httprequest::HttpRequest;
 use std::io::prelude::*;
 use std::net::TcpListener;
@@ -24,7 +24,7 @@ impl<'a> Server<'a> {
             let mut read_buffer = [0; 1024];
             stream.read(&mut read_buffer).unwrap();
             let req = String::from_utf8(read_buffer.to_vec()).unwrap().into();
-            router::route(req, &mut stream);
+            Router::route(req, &mut stream);
         }
     }
 }
