@@ -20,7 +20,6 @@ impl<'a> Server<'a> {
         for stream in connection_listener.incoming() {
             let mut stream = stream.unwrap();
             println!("连接建立成功");
-
             let mut read_buffer = [0; 1024];
             stream.read(&mut read_buffer).unwrap();
             let req = String::from_utf8(read_buffer.to_vec()).unwrap().into();
